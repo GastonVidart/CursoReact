@@ -17,3 +17,30 @@ a {
   color: #09f;
   font-size: 24 px;
 }
+
+.contSpinner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 16px;
+}
+
+.spinner {
+  border: 4px solid rgb(150, 150, 150);
+  border-left-color: rgb(0, 238, 255);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
