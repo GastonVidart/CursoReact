@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import getGifs from "../services/getGifs";
-import Gif from "./Gif";
+import { getGifs } from "../services/getGifs";
+import Gif from "../components/Gif";
+import Spinner from "../components/Spinner";
 
 export default function ListOfGifs({ params }) {
   const { keyword } = params;
@@ -17,12 +18,7 @@ export default function ListOfGifs({ params }) {
   }, [keyword]);
 
   if (loading) {
-    return (
-      <div className="contSpinner">
-        <span>Cargando</span>
-        <div className="spinner"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (

@@ -18,29 +18,29 @@ a {
   font-size: 24 px;
 }
 
-.contSpinner {
+.errorDetalles{
+  margin-top: 16px;
+}
+
+
+.detalles{
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #eee;
+  border-radius: 20px;  
+  color: black;
+}
+
+.contDetalles{
   display: flex;
-  gap: 16px;
-  align-items: center;
-  margin: 16px;
+  flex-direction: column;
+  align-items: start;
+  font-size: 0.8em;
 }
 
-.spinner {
-  border: 4px solid rgb(150, 150, 150);
-  border-left-color: rgb(0, 238, 255);
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+.itemDetalle span:first-child{
+  font-weight: bold;
+  margin-right: 8px;
 
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
