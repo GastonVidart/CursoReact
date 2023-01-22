@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import "./components/Spinner.css";
-import ListOfGifs from "./pages/ListOfGifs";
+import "./components/Spinner/Spinner.css";
+import ListOfGifs from "./pages/SearchResults";
 
 import { Link, Route } from "wouter";
-import GifDetails from "./pages/GifDetails";
+import GifDetails from "./pages/Detail";
+import Home from "./pages/Home";
 
 function App() {
   //const [keyword, setKeyword] = useState("hi");
   return (
     <div className="App">
       <section className="App-content">
-        <h1>App</h1>
-        <Link to="/gifs/panda">Gifs de Pandas</Link>
-        <Link to="/gifs/matrix">Gifs de Matrix</Link>
-        <Link to="/gifs/transformers">Gifs de Transformers</Link>
-        <Route component={ListOfGifs} path="/gifs/:keyword" />
+        <Link to="/"><h1>App</h1></Link>
+        
+        <Route component={Home} path="/" />
+        <Route component={ListOfGifs} path="/search/:keyword" />
         <Route component={GifDetails} path="/gif/:gifId" />
       </section>
     </div>

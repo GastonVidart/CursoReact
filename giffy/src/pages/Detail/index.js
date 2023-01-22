@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
-import { getGif } from "../services/getGifs";
+import Spinner from "../../components/Spinner/Spinner";
+import { getGif } from "../../services/getGifs";
 
 export default function GifDetails({ params }) {
   const { gifId } = params;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getGifs } from "../services/getGifs";
-import Gif from "../components/Gif";
-import Spinner from "../components/Spinner";
+import { getGifs } from "../../services/getGifs";
+
+import Gif from "../../components/Gif/Gif";
+import Spinner from "../../components/Spinner/Spinner";
 
 export default function ListOfGifs({ params }) {
   const { keyword } = params;
