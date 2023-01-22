@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getGifs } from "../../services/getGifs";
 
-import Gif from "../../components/Gif/Gif";
+import ListOfGifs from "../../components/ListOfGifs/ListOfGifs";
 import Spinner from "../../components/Spinner/Spinner";
 
-export default function ListOfGifs({ params }) {
+export default function SearchResults({ params }) {
   const { keyword } = params;
   const [loading, setLoading] = useState(false);
 
@@ -22,11 +22,5 @@ export default function ListOfGifs({ params }) {
     return <Spinner />;
   }
 
-  return (
-    <>
-      {gifs.map(({ title, id, url }) => {
-        return <Gif key={id} title={title} id={id} url={url} />;
-      })}
-    </>
-  );
+  return loading ? <Spinner /> : <ListOfGifs gifs={gifs} />;
 }
