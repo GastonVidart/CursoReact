@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/Spinner";
 import { getGif } from "../../services/getGifs";
 
 export default function GifDetails({ params }) {

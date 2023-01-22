@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
+import ListOfGifs from "../../components/ListOfGifs";
+import Spinner from "../../components/Spinner";
+import { useGifs } from "../../hooks/useGifs";
 
 const POPULAR_GIFS = ["pandas", "matrix", "transformers"];
 
@@ -7,9 +10,11 @@ export default function Home() {
   const [keyword, setKeyword] = useState("");
   const [path, pushLocation] = useLocation();
 
+  const { loading, gifs } = useGifs({ keyword: " Avengers" });
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    pushLocation(`/search/${keyword}`)
+    pushLocation(`/search/${keyword}`);
   };
 
   const handleInputChange = (evt) => {
@@ -37,6 +42,8 @@ export default function Home() {
           </li>
         ))}
       </ul>
+      <h3> Última Búsqueda</h3>
+      {loading ? <Spinner /> : <ListOfGifs gifs={gifs} />}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Gif from "../../components/Gif/Gif";
+import Gif from "../Gif";
 
 export default function ListOfGifs({ gifs }) {
   //TODO: agregar estilos gifs
