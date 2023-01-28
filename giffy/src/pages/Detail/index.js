@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
-import GifContext from "../../context/GifContexts"
+import Gif from "../../components/Gif";
+import GifContext from "../../context/GifContexts";
 
 export default function GifDetails({ params }) {
-  const {gifs} = useContext(GifContext)
-  console.log("🚀[TESTING] || GifDetails || gifs", gifs)
+  const { gifs } = useContext(GifContext);
 
-  return <h1>Gif con id {params.gifId}</h1>;
+  const gif = gifs.find((gif) => gif.id === params.gifId);
+
+  return Boolean(gif) ? (
+    <Gif title={gif.title} id={gif.id} url={gif.url}></Gif>
+  ) : (
+    <Gif title="Gif No Encontrado"></Gif>
+  );
 }
