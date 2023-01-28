@@ -12,7 +12,6 @@ export default function Home() {
 
   const { loading, gifs } = useGifs();
 
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     pushLocation(`/search/${keyword}`);
