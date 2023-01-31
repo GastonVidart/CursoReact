@@ -4,6 +4,8 @@ import ListOfGifs from "../../components/ListOfGifs";
 import Spinner from "../../components/Spinner";
 import { useGifs } from "../../hooks/useGifs";
 
+import './styles.css'
+
 const POPULAR_GIFS = ["pandas", "matrix", "transformers"];
 
 export default function Home() {
@@ -23,15 +25,15 @@ export default function Home() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-          <label htmlFor="buscador">Buscador:</label>
+        <div className="buscador">
+          <label htmlFor="buscador" hidden>Buscador:</label>
           <input
             id="buscador"
-            style={{ height: "auto" }}
             type="text"
             value={keyword}
             onChange={handleInputChange}
           ></input>
+          <button>Buscar</button>
         </div>
       </form>
       <h3>Los gifs más populares</h3>
