@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 
 import { getTrendingTerms } from "services/getTrendingTermsService";
-import './Trending.css'
+import "./Trending.css";
 
-export default function Trending() {
+function Trending() {
   const [trendingTerms, setTrendingTerms] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,11 +27,34 @@ export default function Trending() {
         <ul className="trending-list">
           {trendingTerms.map((popularGif) => (
             <li key={popularGif}>
-              <Link className="trending-link" to={`/search/${popularGif}`}>{popularGif}</Link>
+              <Link className="trending-link" to={`/search/${popularGif}`}>
+                {popularGif}
+              </Link>
             </li>
           ))}
         </ul>
       )}
     </>
   );
+}
+
+export default function LazyTrending() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onChange = (entries) => {
+      const element = entries[0];
+      if (element.isIntersecting) {
+        setShow(true);
+      }
+    };
+
+    const observer = new IntersectionObserver(onChange, {
+      rootMargin: "200px",
+    });
+
+    observer.observe(document.getElementById("test"));
+  });
+
+  return <div id="test">{show ? <Trending /> : null}</div>;
 }

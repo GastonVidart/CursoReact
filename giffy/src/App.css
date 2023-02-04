@@ -27,6 +27,8 @@ h3{
 
 .App-results {
   flex-shrink: 2;
+  min-height: 1000px;
+
 }
 
 .App-category {
