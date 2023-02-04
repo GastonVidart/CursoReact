@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css'
 
-import Gif from "../Gif";
+import Gif from "components/Gif";
 
 export default function ListOfGifs({ gifs }) {
   return (

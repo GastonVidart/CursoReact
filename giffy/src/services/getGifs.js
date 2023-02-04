@@ -1,7 +1,7 @@
-const API_KEY = "irC0d6izVLwB1jy91fRpJnE6zja9Fddj";
+const { REACT_APP_API_KEY, REACT_APP_GIPHY_BASE_URL } = process.env;
 
 function getGifs({ keyword = "not found" } = {}) {
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=10&offset=0&rating=g&lang=en`;
+  const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/search?api_key=${REACT_APP_API_KEY}&q=${keyword}&limit=10&offset=0&rating=g&lang=en`;
   return fetch(url)
     .then((res) => res.json())
     .then((response) => {
@@ -18,7 +18,7 @@ function getGifs({ keyword = "not found" } = {}) {
 }
 
 function getGif(gifId) {
-  const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=${API_KEY}`;
+  const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/${gifId}?api_key=${REACT_APP_API_KEY}`;
   return fetch(url)
     .then((res) => {
       if (res.status !== 200) {
