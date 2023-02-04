@@ -20,14 +20,14 @@ export default function Trending() {
 
   return (
     <>
-      <h3>Los gifs más populares</h3>
+      <h3 className="trending-title">Los gifs más populares</h3>
       {loading ? (
         <div className="spinner"></div>
       ) : (
-        <ul className="lista">
+        <ul className="trending-list">
           {trendingTerms.map((popularGif) => (
-            <li key={popularGif} style={{ listStyle: "none" }}>
-              <Link to={`/search/${popularGif}`}>{popularGif}</Link>
+            <li key={popularGif}>
+              <Link className="trending-link" to={`/search/${popularGif}`}>{popularGif}</Link>
             </li>
           ))}
         </ul>

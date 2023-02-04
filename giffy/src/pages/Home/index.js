@@ -32,10 +32,16 @@ export default function Home() {
           <input id="buscador" type="text" value={keyword} onChange={handleInputChange}></input>
           <button>Buscar</button>
         </div>
-      </form>      
-      <Trending />
-      <h3> Última Búsqueda</h3>
-      {loading ? <Spinner /> : <ListOfGifs gifs={gifs} />}
+      </form>
+      <div className="App-main">
+        <div className="App-results">
+          <h3> Última Búsqueda</h3>
+          {loading ? <Spinner /> : <ListOfGifs gifs={gifs} />}
+        </div>
+        <div className="App-category">
+          <Trending />
+        </div>
+      </div>
     </>
   );
 }
