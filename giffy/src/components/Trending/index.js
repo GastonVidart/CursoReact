@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 
 import { getTrendingTerms } from "services/getTrendingTermsService";
-import './styles.css'
+import './Trending.css'
 
 export default function Trending() {
   const [trendingTerms, setTrendingTerms] = useState([]);

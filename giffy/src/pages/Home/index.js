@@ -6,7 +6,7 @@ import Spinner from "components/Spinner";
 import Trending from "components/Trending";
 import { useGifs } from "hooks/useGifs";
 
-import "./styles.css";
+import "./Home.css";
 
 export default function Home() {
   const [keyword, setKeyword] = useState("");
