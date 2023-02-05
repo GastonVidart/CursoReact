@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
 import { getTrendingTerms } from "services/getTrendingTermsService";
@@ -40,6 +40,7 @@ function Trending() {
 
 export default function LazyTrending() {
   const [show, setShow] = useState(false);
+  const elementRef = useRef();
 
   useEffect(() => {
     const onChange = (entries) => {
@@ -53,8 +54,8 @@ export default function LazyTrending() {
       rootMargin: "200px",
     });
 
-    observer.observe(document.getElementById("test"));
+    observer.observe(elementRef.current);
   });
 
-  return <div id="test">{show ? <Trending /> : null}</div>;
+  return <div ref={elementRef}>{show ? <Trending /> : null}</div>;
 }
