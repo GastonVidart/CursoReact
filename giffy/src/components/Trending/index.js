@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 
 import { getTrendingTerms } from "services/getTrendingTermsService";
 import "./Trending.css";
+import useNearScreen from "hooks/useNearScreen";
 
 function Trending() {
   const [trendingTerms, setTrendingTerms] = useState([]);
@@ -38,37 +39,8 @@ function Trending() {
   );
 }
 
-function useNearScreen() {
-  const [isNearScreen, setIsNearScreen] = useState(false);
-  const fromRef = useRef();
-
-  useEffect(() => {
-    let observer;
-
-    const onChange = (entries, observer) => {
-      const element = entries[0];
-      if (element.isIntersecting) {
-        setIsNearScreen(true);
-        observer.disconnect();
-      }
-    };
-
-    Promise.resolve(IntersectionObserver ?? import("intersection-observer")).then(() => {
-      observer = new IntersectionObserver(onChange, {
-        rootMargin: "200px",
-      });
-
-      observer.observe(fromRef.current);
-    });
-
-    return () => observer && observer.disconnect();
-  });
-
-  return { isNearScreen, fromRef };
-}
-
 export default function LazyTrending() {
-  const { isNearScreen, fromRef } = useNearScreen();
+  const { isNearScreen, fromRef } = useNearScreen({ distance: "200px" });
 
   return <div ref={fromRef}>{isNearScreen ? <Trending /> : null}</div>;
 }
