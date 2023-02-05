@@ -38,18 +38,17 @@ function Trending() {
   );
 }
 
-export default function LazyTrending() {
-  const [show, setShow] = useState(false);
-  const elementRef = useRef();
+function useNearScreen() {
+  const [isNearScreen, setIsNearScreen] = useState(false);
+  const fromRef = useRef();
 
   useEffect(() => {
     let observer;
 
     const onChange = (entries, observer) => {
       const element = entries[0];
-      console.log("🚀[TESTING] || onChange || element.isIntersecting", element.isIntersecting);
       if (element.isIntersecting) {
-        setShow(true);
+        setIsNearScreen(true);
         observer.disconnect();
       }
     };
@@ -59,11 +58,17 @@ export default function LazyTrending() {
         rootMargin: "200px",
       });
 
-      observer.observe(elementRef.current);
+      observer.observe(fromRef.current);
     });
 
     return () => observer && observer.disconnect();
   });
 
-  return <div ref={elementRef}>{show ? <Trending /> : null}</div>;
+  return { isNearScreen, fromRef };
+}
+
+export default function LazyTrending() {
+  const { isNearScreen, fromRef } = useNearScreen();
+
+  return <div ref={fromRef}>{isNearScreen ? <Trending /> : null}</div>;
 }
