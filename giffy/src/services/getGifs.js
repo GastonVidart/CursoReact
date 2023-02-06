@@ -1,7 +1,11 @@
 const { REACT_APP_API_KEY, REACT_APP_GIPHY_BASE_URL } = process.env;
+const LIMIT = 10;
 
-function getGifs({ keyword = "not found" } = {}) {
-  const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/search?api_key=${REACT_APP_API_KEY}&q=${keyword}&limit=10&offset=0&rating=g&lang=en`;
+function getGifs({ keyword = "not found", pagina = 0 } = {}) {
+  const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/search?api_key=${REACT_APP_API_KEY}&q=${keyword}&limit=${LIMIT}&offset=${
+    pagina * LIMIT
+  }&rating=g&lang=en`;
+
   return fetch(url)
     .then((res) => res.json())
     .then((response) => {

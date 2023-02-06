@@ -1,12 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import GifsContext from "../context/GifContexts";
-import { getGifs } from "../services/getGifs";
+import { getGif, getGifs } from "../services/getGifs";
+
+const PAGINA_INICIAL = 0;
 
 export function useGifs({ keyword } = { keyword: null }) {
   const [loading, setLoading] = useState(false);
+  const [pagina, setPagina] = useState(PAGINA_INICIAL);
   const { gifs, setGifs } = useContext(GifsContext);
 
   const keywordToUse = keyword || localStorage.getItem("lastKeyword") || "random";
+
+  const paginaSiguiente = () => {
+    setPagina((pagina) => pagina + 1);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -15,7 +22,15 @@ export function useGifs({ keyword } = { keyword: null }) {
       setLoading(false);
       localStorage.setItem("lastKeyword", keywordToUse);
     });
-  }, [keyword, keywordToUse]);
+  }, [keyword, keywordToUse, setGifs]);
 
-  return { loading, gifs };
+  useEffect(() => {
+    if (pagina === PAGINA_INICIAL) return;
+
+    getGifs({ keyword: keywordToUse, pagina }).then((gifs) =>
+      setGifs((prevGifs) => prevGifs.concat(gifs))
+    );
+  }, [keywordToUse, pagina, setGifs]);
+
+  return { loading, gifs, paginaSiguiente };
 }
