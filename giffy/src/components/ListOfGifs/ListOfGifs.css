@@ -3,26 +3,26 @@
 }
 
 .listOfGifs {
-  column-count: var(--results-columns);
-  column-gap: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px 16px;
+  align-items: center;
+  grid-template-rows: masonry;
 }
 
-.listOfGifs-item {
-  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-  page-break-inside: avoid; /* Firefox */
-  break-inside: avoid; /* IE 10+ */
-  background-color: #eee;
+.listOfGifs-item {  
+  background-color: hsl(0, 0%, 93%);
   display: inline-block;
   width: 100%;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 400px) {
   :root {
     --results-columns: 2;
   }
 }
 
-@media (min-width: 1150px) {
+@media (min-width: 800px) {
   :root {
     --results-columns: 3;
   }
