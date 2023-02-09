@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 
 import ListOfGifs from "components/ListOfGifs";
-import Spinner from "components/Spinner";
 import Trending from "components/Trending";
 import { useGifs } from "hooks/useGifs";
 
@@ -36,7 +35,7 @@ export default function Home() {
       <div className="App-main">
         <div className="App-results">
           <h3> Última Búsqueda</h3>
-          {loading ? <Spinner /> : <ListOfGifs gifs={gifs} />}
+          <ListOfGifs gifs={gifs} loading={loading} />
         </div>
         <div className="App-category">
           <Trending />

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 
 import { useGifs } from "hooks/useGifs";
-import Spinner from "components/Spinner";
 import ListOfGifs from "components/ListOfGifs";
 
 import "./SearchResults.css";
@@ -17,29 +16,26 @@ export default function SearchResults({ params }) {
   //TODO: optimizacion renders
 
   useEffect(() => {
-  const handleNextPage = () => {
-    paginaSiguiente();
-  };
     if (isNearScreen) handleNextPage();
   }, [isNearScreen]);
 
   const handleNextPage = useCallback(
-    debounce(() => paginaSiguiente(), 1000),
+    debounce(() => {
+      paginaSiguiente();
+    }, 200),
     []
   );
 
-  return loading ? (
-    <Spinner />
-  ) : (
+  return (
     <>
-      <div /*className="SearchResults"*/>
+      <div className="SearchResults">
         <h3>{decodeURI(keyword)}</h3>
-        <ListOfGifs gifs={gifs}/>
+        <ListOfGifs gifs={gifs} loading={loading} />
         {/*<button className="boton" onClick={handleNextPage}>
         Cargar Más
   </button>*/}
-        <div id="visor" ref={ref}></div>
       </div>
+      <div id="visor" ref={ref}></div>
     </>
   );
 }

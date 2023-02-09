@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import GifsContext from "../context/GifContexts";
-import { getGif, getGifs } from "../services/getGifs";
+import { getGifs } from "../services/getGifs";
 
 const PAGINA_INICIAL = 0;
 
@@ -26,10 +26,11 @@ export function useGifs({ keyword } = { keyword: null }) {
 
   useEffect(() => {
     if (pagina === PAGINA_INICIAL) return;
+    setLoading(true);
 
-    getGifs({ keyword: keywordToUse, pagina }).then((gifs) =>
-      setGifs((prevGifs) => prevGifs.concat(gifs))
-    );
+    getGifs({ keyword: keywordToUse, pagina })
+      .then((gifs) => setGifs((prevGifs) => prevGifs.concat(gifs)))
+      .finally(() => setLoading(false));
   }, [keywordToUse, pagina, setGifs]);
 
   return { loading, gifs, paginaSiguiente };
