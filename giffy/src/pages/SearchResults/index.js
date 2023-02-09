@@ -15,16 +15,16 @@ export default function SearchResults({ params }) {
 
   //TODO: optimizacion renders
 
-  useEffect(() => {
-    if (isNearScreen) handleNextPage();
-  }, [isNearScreen]);
-
   const handleNextPage = useCallback(
     debounce(() => {
       paginaSiguiente();
     }, 200),
     []
   );
+
+  useEffect(() => {
+    if (isNearScreen) handleNextPage();
+  }, [handleNextPage, isNearScreen]);
 
   return (
     <>
