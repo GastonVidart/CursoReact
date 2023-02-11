@@ -1,37 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "wouter";
 
 import ListOfGifs from "components/ListOfGifs";
 import Trending from "components/Trending";
+import SearchForm from "components/SearchForm";
 import { useGifs } from "hooks/useGifs";
 
 import "./Home.css";
 
 export default function Home() {
-  const [keyword, setKeyword] = useState("");
   const [path, pushLocation] = useLocation();
 
   const { loading, gifs } = useGifs();
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (keyword) => {
     pushLocation(`/search/${keyword}`);
   };
 
-  const handleInputChange = (evt) => {
-    setKeyword(evt.target.value);
-  };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="buscador">
-          <label htmlFor="buscador" hidden>
-            Buscador:
-          </label>
-          <input id="buscador" type="text" value={keyword} onChange={handleInputChange}></input>
-          <button>Buscar</button>
-        </div>
-      </form>
+      <SearchForm onSubmit={handleSubmit} />
+
       <div className="App-main">
         <div className="App-results">
           <h3> Última Búsqueda</h3>
