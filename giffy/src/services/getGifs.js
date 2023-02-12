@@ -1,7 +1,7 @@
 const { REACT_APP_API_KEY, REACT_APP_GIPHY_BASE_URL } = process.env;
 const LIMIT = 10;
 
-function getGifs({ keyword = "not found", pagina = 0 } = {}) {
+export default function getGifs({ keyword = "not found", pagina = 0 } = {}) {
   const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/search?api_key=${REACT_APP_API_KEY}&q=${keyword}&limit=${LIMIT}&offset=${
     pagina * LIMIT
   }&rating=g&lang=en`;
@@ -20,21 +20,3 @@ function getGifs({ keyword = "not found", pagina = 0 } = {}) {
       }
     });
 }
-
-function getGif(gifId) {
-  const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/${gifId}?api_key=${REACT_APP_API_KEY}`;
-  return fetch(url)
-    .then((res) => {
-      if (res.status !== 200) {
-        throw new Error(`Error al buscar Gif. Código: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then((response) => {
-      const { type, id, url, title, images } = response.data;
-      const { url: urlGif } = images.downsized_medium;
-      return { type, id, url, title, urlGif };
-    });
-}
-
-export { getGifs, getGif };

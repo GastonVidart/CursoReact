@@ -1,12 +1,10 @@
 import React from "react";
 
 import Gif from "components/Gif";
-import useGlobalGifs from "hooks/useGlobalGifs";
+import { useSingleGif } from "hooks/useSingleGif";
 
 export default function GifDetails({ params }) {
-  const gifs = useGlobalGifs();
-
-  const gif = gifs.find((gif) => gif.id === params.gifId);
+  const gif = useSingleGif(params.gifId);
 
   return Boolean(gif) ? (
     <Gif title={gif.title} id={gif.id} url={gif.url}></Gif>
