@@ -8,8 +8,6 @@ export default function TrendingSearches() {
   const [trendingTerms, setTrendingTerms] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  //TODO: agregar estilos para que vaya al costado der y demás como en el video
-
   useEffect(() => {
     setLoading(true);
     getTrendingTerms().then((trending) => {
@@ -20,7 +18,7 @@ export default function TrendingSearches() {
 
   return (
     <>
-      <h3 className="trending-title">Los gifs más populares</h3>
+      <h3 className="trending-title">Tendencias</h3>
       {loading ? (
         <Spinner />
       ) : (
