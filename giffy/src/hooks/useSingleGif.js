@@ -25,7 +25,7 @@ export function useSingleGif(gifId) {
       setGif(gifFromCache);
       setIsLoading(false);
     }
-  }, [gifId]);
+  }, [gifs, gifId]);
 
   return { gif, isLoading, isError };
 }
