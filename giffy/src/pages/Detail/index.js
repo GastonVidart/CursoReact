@@ -4,9 +4,13 @@ import Gif from "components/Gif";
 import { useSingleGif } from "hooks/useSingleGif";
 import Spinner from "components/Spinner";
 import { Redirect } from "wouter";
+import useSEO from "hooks/useSEO";
 
 export default function GifDetails({ params }) {
   const { gif, isLoading, isError } = useSingleGif(params.gifId);
+
+  const title = gif ? gif.title : "";
+  useSEO({ description: `Descripción de ${title}`, title });
 
   if (isLoading) return <Spinner />;
 
