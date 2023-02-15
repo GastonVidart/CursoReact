@@ -1,0 +1,67 @@
+.gif {
+  /*border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  color: white;
+  text-decoration: none;
+  position: relative;*/
+  margin-bottom: 0.5em;
+}
+
+.gif-link {
+  color: black;
+  display: block;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+}
+
+.gif-label {
+  background: rgba(0, 0, 0, 0.3);
+  bottom: 0;
+  left: 0;
+  font-size: 12px;
+  color: white;
+  margin: 0;
+  position: absolute;
+  border-top-right-radius: 5px;
+  box-sizing: border-box;  
+  padding: 3px 5px 3px 5px;
+}
+
+.gif-image{
+  width: 100%;
+  object-fit: contain;
+  vertical-align: top;
+}
+
+a {
+  color: #09f;
+  font-size: 24 px;
+}
+
+.errorDetalles {
+  margin-top: 16px;
+}
+
+.detalles {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #eee;
+  border-radius: 20px;
+  color: black;
+}
+
+.contDetalles {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 0.8em;
+}
+
+.itemDetalle span:first-child {
+  font-weight: bold;
+  margin-right: 8px;
+}

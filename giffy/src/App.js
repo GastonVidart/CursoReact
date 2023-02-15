@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import "./App.css";
+import "./components/Spinner/Spinner.css";
+
+import { Link, Route } from "wouter";
+import GifDetails from "./pages/Detail";
+import SearchResults from "./pages/SearchResults";
+import StaticContext from "./context/StaticContext";
+import { GifsContextProvider } from "./context/GifContexts";
+
+const LazyHome = React.lazy(() => import("./pages/Home"));
 
 function App() {
+  //const [keyword, setKeyword] = useState("hi");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StaticContext.Provider value={{ name: "gaston", probando: true }}>
+      <div className="App">
+        <Suspense fallback={null}>
+          <section className="App-content">
+            <Link to="/">
+              <h1>App</h1>
+            </Link>
+
+            <GifsContextProvider>
+              <Route component={LazyHome} path="/" />
+              <Route component={SearchResults} path="/search/:keyword" />
+              <Route component={GifDetails} path="/gif/:gifId" />
+            </GifsContextProvider>
+          </section>
+        </Suspense>
+      </div>
+    </StaticContext.Provider>
   );
 }
 
