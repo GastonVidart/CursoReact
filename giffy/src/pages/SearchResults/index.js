@@ -6,7 +6,9 @@ import ListOfGifs from "components/ListOfGifs";
 import "./SearchResults.css";
 import useNearScreen from "hooks/useNearScreen";
 import debounce from "just-debounce-it";
-import useSEO from "hooks/useSEO";
+import { Helmet } from "react-helmet";
+
+const { REACT_APP_NAME } = process.env;
 
 export default function SearchResults({ params }) {
   const { keyword } = params;
@@ -15,7 +17,7 @@ export default function SearchResults({ params }) {
   const { isNearScreen } = useNearScreen({ externalRef: loading ? null : ref, once: false });
 
   let title;
-  //FIXME: arreglar que no se ve loading 
+
   if (Boolean(gifs)) {
     title = `${gifs.length} resultados de '${decodeURI(keyword)}'`;
   } else if (loading) {
@@ -23,8 +25,8 @@ export default function SearchResults({ params }) {
   } else {
     title = "";
   }
-  
-  useSEO({ title });
+
+  title += `| ${REACT_APP_NAME}`;
 
   //TODO: optimizacion renders
 
@@ -41,12 +43,15 @@ export default function SearchResults({ params }) {
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={title} />
+        <meta name="rating" content="General" />
+      </Helmet>
+
       <div className="SearchResults">
         <h3>{decodeURI(keyword)}</h3>
         <ListOfGifs gifs={gifs} loading={loading} />
-        {/*<button className="boton" onClick={handleNextPage}>
-        Cargar Más
-  </button>*/}
       </div>
       <div id="visor" ref={ref}></div>
     </>
