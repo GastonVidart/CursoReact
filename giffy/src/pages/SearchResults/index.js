@@ -7,6 +7,7 @@ import "./SearchResults.css";
 import useNearScreen from "hooks/useNearScreen";
 import debounce from "just-debounce-it";
 import { Helmet } from "react-helmet";
+import SearchForm from "components/SearchForm";
 
 const { REACT_APP_NAME } = process.env;
 
@@ -48,6 +49,8 @@ export default function SearchResults({ params }) {
         <meta name="description" content={title} />
         <meta name="rating" content="General" />
       </Helmet>
+
+      <SearchForm />
 
       <div className="SearchResults">
         <h3>{decodeURI(keyword)}</h3>
