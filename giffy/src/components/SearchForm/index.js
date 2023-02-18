@@ -1,12 +1,36 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { useLocation } from "wouter";
 import "./SearchFrom.css";
 
 const RATINGS = ["g", "pg", "pg-13", "r"];
 
-function SearchForm({initialKeyword = "", initialRating}) {
-  const [keyword, setKeyword] = useState(decodeURIComponent(initialKeyword));
-  const [rating, setRating] = useState(initialRating);
+const ACTIONS = {
+  UPDATE_KEYWORD: "keyword",
+  UPDATE_RATING: "rating",
+};
+
+const reducer = (state, action) => {
+  const { type } = action;
+  switch (type) {
+    case ACTIONS.UPDATE_KEYWORD: {
+      return { ...state, keyword: action.payload, times: state.times + 1 };
+    }
+    case ACTIONS.UPDATE_RATING: {
+      return { ...state, rating: action.payload };
+    }
+    default:
+      return state;
+  }
+};
+
+function SearchForm({ initialKeyword = "", initialRating }) {
+  const [state, dispatch] = useReducer(reducer, {
+    keyword: decodeURIComponent(initialKeyword),
+    rating: initialRating,
+    times: 0,
+  });
+
+  const { keyword, rating, times } = state;
 
   const [, pushLocation] = useLocation();
 
@@ -17,11 +41,11 @@ function SearchForm({initialKeyword = "", initialRating}) {
   };
 
   const handleInputChange = (evt) => {
-    setKeyword(evt.target.value);
+    dispatch({ type: ACTIONS.UPDATE_KEYWORD, payload: evt.target.value });
   };
 
   const handleRatingChange = (evt) => {
-    setRating(evt.target.value);
+    dispatch({ type: ACTIONS.UPDATE_RATING, payload: evt.target.value });
   };
 
   return (
@@ -38,6 +62,7 @@ function SearchForm({initialKeyword = "", initialRating}) {
           ))}{" "}
         </select>
         <button>Buscar</button>
+        <span>{times}</span>
       </div>
     </form>
   );
