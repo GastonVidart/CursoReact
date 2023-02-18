@@ -12,8 +12,8 @@ import SearchForm from "components/SearchForm";
 const { REACT_APP_NAME } = process.env;
 
 export default function SearchResults({ params }) {
-  const { keyword } = params;
-  const { loading, gifs, paginaSiguiente } = useGifs({ keyword });
+  const { keyword, rating = "g" } = params;
+  const { loading, gifs, paginaSiguiente } = useGifs({ keyword, rating });
   const ref = useRef();
   const { isNearScreen } = useNearScreen({ externalRef: loading ? null : ref, once: false });
 
@@ -42,6 +42,8 @@ export default function SearchResults({ params }) {
     if (isNearScreen) handleNextPage();
   }, [handleNextPage, isNearScreen]);
 
+  //FIXME: no esta funcionando el loading al hacer un nuevo search en search form
+
   return (
     <>
       <Helmet>
@@ -50,7 +52,7 @@ export default function SearchResults({ params }) {
         <meta name="rating" content="General" />
       </Helmet>
 
-      <SearchForm />
+      <SearchForm initialKeyword={keyword} initialRating={rating} />
 
       <div className="SearchResults">
         <h3>{decodeURI(keyword)}</h3>

@@ -1,10 +1,10 @@
 const { REACT_APP_API_KEY, REACT_APP_GIPHY_BASE_URL } = process.env;
 const LIMIT = 10;
 
-export default function getGifs({ keyword = "not found", pagina = 0 } = {}) {
+export default function getGifs({ keyword = "not found", rating = "g", pagina = 0 } = {}) {
   const url = `${REACT_APP_GIPHY_BASE_URL}/gifs/search?api_key=${REACT_APP_API_KEY}&q=${keyword}&limit=${LIMIT}&offset=${
     pagina * LIMIT
-  }&rating=g&lang=en`;
+  }&rating=${rating}&lang=en`;
 
   return fetch(url)
     .then((res) => res.json())

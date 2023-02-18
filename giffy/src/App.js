@@ -23,7 +23,7 @@ function App() {
 
             <GifsContextProvider>
               <Route component={LazyHome} path="/" />
-              <Route component={SearchResults} path="/search/:keyword" />
+              <Route component={SearchResults} path="/search/:keyword/:rating?" />
               <Route component={GifDetails} path="/gif/:gifId" />
               <Route component={Error404} path="/404" />
             </GifsContextProvider>
