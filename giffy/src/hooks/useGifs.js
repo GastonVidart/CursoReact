@@ -31,7 +31,7 @@ export function useGifs({ keyword, rating } = { keyword: null }) {
     getGifs({ keyword: keywordToUse, rating, pagina })
       .then((gifs) => setGifs((prevGifs) => prevGifs.concat(gifs)))
       .finally(() => setLoading(false));
-  }, [keywordToUse, pagina, setGifs]);
+  }, [keywordToUse, rating, pagina, setGifs]);
 
   return { loading, gifs, rating, paginaSiguiente };
 }
