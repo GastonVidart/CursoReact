@@ -7,11 +7,11 @@ import GifDetails from "./pages/Detail";
 import SearchResults from "./pages/SearchResults";
 import StaticContext from "./context/StaticContext";
 import { GifsContextProvider } from "./context/GifContexts";
+import Error404 from "pages/404";
 
 const LazyHome = React.lazy(() => import("./pages/Home"));
 
 function App() {
-  //const [keyword, setKeyword] = useState("hi");
   return (
     <StaticContext.Provider value={{ name: "gaston", probando: true }}>
       <div className="App">
@@ -25,6 +25,7 @@ function App() {
               <Route component={LazyHome} path="/" />
               <Route component={SearchResults} path="/search/:keyword" />
               <Route component={GifDetails} path="/gif/:gifId" />
+              <Route component={Error404} path="/404" />
             </GifsContextProvider>
           </section>
         </Suspense>

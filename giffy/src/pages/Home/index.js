@@ -7,6 +7,9 @@ import SearchForm from "components/SearchForm";
 import { useGifs } from "hooks/useGifs";
 
 import "./Home.css";
+import { Helmet } from "react-helmet";
+
+const { REACT_APP_NAME } = process.env;
 
 export default function Home() {
   const [path, pushLocation] = useLocation();
@@ -22,6 +25,9 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>{`Home | ${REACT_APP_NAME}`}</title>
+      </Helmet>
       <SearchForm onSubmit={handleSubmit} />
 
       <div className="App-main">

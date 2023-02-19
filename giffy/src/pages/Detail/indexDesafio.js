@@ -34,7 +34,7 @@ export default function GifDetails({ params }) {
     <div className="detalles">
       <h4>{title}</h4>
       {/*TODO: onLoad img */}
-      <img src={urlGif} alt="Gif"></img>
+      <img src={url} alt="Gif"></img>
       <div className="contDetalles">
         <div className="itemDetalle">
           <span>Gif Id:</span>
@@ -48,8 +48,8 @@ export default function GifDetails({ params }) {
 
         <div className="itemDetalle">
           <span>Url:</span>
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            {url}
+          <a href={urlGif} target="_blank" rel="noopener noreferrer">
+            {urlGif}
           </a>
         </div>
       </div>

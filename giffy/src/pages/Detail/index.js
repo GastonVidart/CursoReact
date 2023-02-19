@@ -1,15 +1,37 @@
 import React from "react";
 
 import Gif from "components/Gif";
-import useGlobalGifs from "hooks/useGlobalGifs";
+import { useSingleGif } from "hooks/useSingleGif";
+import Spinner from "components/Spinner";
+import { Redirect } from "wouter";
+import { Helmet } from "react-helmet";
+
+const { REACT_APP_NAME } = process.env;
 
 export default function GifDetails({ params }) {
-  const gifs = useGlobalGifs();
+  const { gif, isLoading, isError } = useSingleGif(params.gifId);
 
-  const gif = gifs.find((gif) => gif.id === params.gifId);
+  const title = gif ? `${gif.title} | ${REACT_APP_NAME}` : "";
+
+  if (isLoading)
+    return (
+      <>
+        <Helmet>
+          <title>{`Cargando ... ${REACT_APP_NAME}`}</title>
+        </Helmet>
+        <Spinner />
+      </>
+    );
+
+  if (isError) return <Redirect to="/404" />;
 
   return Boolean(gif) ? (
-    <Gif title={gif.title} id={gif.id} url={gif.url}></Gif>
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <Gif title={gif.title} id={gif.id} url={gif.url}></Gif>
+    </>
   ) : (
     <Gif title="Gif No Encontrado"></Gif>
   );
