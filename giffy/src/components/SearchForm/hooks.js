@@ -5,6 +5,8 @@ const ACTIONS = {
   UPDATE_RATING: "rating",
 };
 
+//TODO: agregar reducer de language, ver api param 'lang'
+//TODO: agregar reducer reset filters
 const ACTIONS_REDUCERS = {
   [ACTIONS.UPDATE_KEYWORD]: (state, action) => ({
     ...state,
